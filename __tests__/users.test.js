@@ -78,10 +78,10 @@ describe("Test messages part of User class", function () {
     await db.query("ALTER SEQUENCE messages_id_seq RESTART WITH 1");
 
     let u1 = await User.register({
-      username: "test1",
+      username: "test",
       password: "password",
-      first_name: "Test1",
-      last_name: "Testy1",
+      first_name: "Test",
+      last_name: "Testy",
       phone: "+14155550000",
     });
     let u2 = await User.register({
@@ -92,19 +92,19 @@ describe("Test messages part of User class", function () {
       phone: "+14155552222",
     });
     let m1 = await Message.create({
-      from_username: "test1",
+      from_username: "test",
       to_username: "test2",
       body: "u1-to-u2"
     });
     let m2 = await Message.create({
       from_username: "test2",
-      to_username: "test1",
+      to_username: "test",
       body: "u2-to-u1"
     });
   });
 
   test('can get messages from user', async function () {
-    let m = await User.messagesFrom("test1");
+    let m = await User.messagesFrom("test");
     expect(m).toEqual([{
       id: expect.any(Number),
       body: "u1-to-u2",
@@ -120,7 +120,7 @@ describe("Test messages part of User class", function () {
   });
 
   test('can get messages to user', async function () {
-    let m = await User.messagesTo("test1");
+    let m = await User.messagesTo("test");
     expect(m).toEqual([{
       id: expect.any(Number),
       body: "u2-to-u1",
